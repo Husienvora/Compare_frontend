@@ -50,6 +50,9 @@ function SidePanel() {
                       </button>
                     )}
                   </div>
+                  <div className="card-actions justify-center mt-5">
+                    <button>Visit</button>
+                  </div>
                 </div>
               </div>
             </div>

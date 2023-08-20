@@ -51,7 +51,14 @@ function SidePanel() {
                     )}
                   </div>
                   <div className="card-actions justify-center mt-5">
-                    <button>Visit</button>
+                    <button
+                      onClick={() => {
+                        window.open(modelsList[ele].info.modelUrl);
+                      }}
+                      className="btn glass btn-outline btn-success"
+                    >
+                      Visit website
+                    </button>
                   </div>
                 </div>
               </div>

@@ -33,7 +33,7 @@ function Interact() {
       ) : (
         ""
       )}
-      <div className="Chathide"></div>
+
       <div className="inputContainer">
         <input className="input" type="text" placeholder="Send a message" />
         <button

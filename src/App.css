@@ -30,6 +30,7 @@
 }
 
 .Interact {
+  height: 82%;
   flex: 1;
   margin-left: 1%;
   padding: 20px;

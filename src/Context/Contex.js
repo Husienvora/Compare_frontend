@@ -18,28 +18,34 @@ export default function NormalProvider({ children }) {
     { role: "system", content: "You are a helpful assistant." },
   ]);
   // Socket initialization
+
   const SendMessage = async (msg) => {
-    let payloadmsg = [...Messages, { role: "user", content: msg }];
-    setLoading(true);
-    setMessages(payloadmsg);
-    let answer = await axios.post(
-      process.env.REACT_APP_API + "/chat",
-      {
-        modelname: CurrentlySelected,
-        messages: payloadmsg,
-        params: {
-          maxTokens: 600,
+    try {
+      let payloadmsg = [...Messages, { role: "user", content: msg }];
+      setLoading(true);
+      setMessages(payloadmsg);
+      let answer = "";
+      answer = await axios.post(
+        process.env.REACT_APP_API + "/chat",
+        {
+          modelname: CurrentlySelected,
+          messages: payloadmsg,
+          params: {
+            maxTokens: 600,
+          },
         },
-      },
-      (res) => {
-        return res.data;
-      }
-    );
-    console.log(answer);
-    payloadmsg = [...payloadmsg, { role: "assistant", content: answer.data }];
-    setMessages(payloadmsg);
-    setLoading(false);
-    console.log(Messages);
+        (res) => {
+          return res.data;
+        }
+      );
+      console.log(answer);
+      payloadmsg = [...payloadmsg, { role: "assistant", content: answer.data }];
+      setMessages(payloadmsg);
+      setLoading(false);
+      console.log(Messages);
+    } catch (error) {
+      setTimeout(SendMessage(msg), 5000);
+    }
   };
 
   useEffect(() => {

@@ -8,9 +8,8 @@ function Interact() {
     <div className="Interact">
       {Messages.map((ele) => {
         if (
-          ele.role == "system" ||
-          (ele.role == "assistant" &&
-            ele.content != "You are a helpful assistant.")
+          (ele.role == "system" || ele.role == "assistant") &&
+          ele.content != "You are a helpful assistant."
         ) {
           return (
             <div className="chatContainerai">

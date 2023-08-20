@@ -7,13 +7,17 @@ function Interact() {
   return (
     <div className="Interact">
       {Messages.map((ele) => {
-        if (ele.role == "system" || ele.role == "assistant") {
+        if (
+          ele.role == "system" ||
+          (ele.role == "assistant" &&
+            ele.content != "You are a helpful assistant.")
+        ) {
           return (
             <div className="chatContainerai">
               <div className="chatMessage">{ele.content}</div>
             </div>
           );
-        } else {
+        } else if (ele.role == "user") {
           return (
             <div className="chatContaineruser">
               <div className="chatMessage">{ele.content}</div>

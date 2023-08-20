@@ -10,6 +10,7 @@ const NormalContext = createContext(null);
 
 export default function NormalProvider({ children }) {
   const [modelsList, setmodelsList] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const [CurrentlySelected, setCurrentlySelected] = useState(
     "openai:gpt-3.5-turbo-16k-0613"
   );
@@ -19,6 +20,7 @@ export default function NormalProvider({ children }) {
   // Socket initialization
   const SendMessage = async (msg) => {
     let payloadmsg = [...Messages, { role: "user", content: msg }];
+    setLoading(true);
     setMessages(payloadmsg);
     let answer = await axios.post(
       process.env.REACT_APP_API + "/chat",
@@ -36,6 +38,7 @@ export default function NormalProvider({ children }) {
     console.log(answer);
     payloadmsg = [...payloadmsg, { role: "assistant", content: answer.data }];
     setMessages(payloadmsg);
+    setLoading(false);
     console.log(Messages);
   };
 
@@ -57,6 +60,8 @@ export default function NormalProvider({ children }) {
     Messages,
     setMessages,
     SendMessage,
+    Loading,
+    setLoading,
   };
   return (
     <NormalContext.Provider value={contextValue}>

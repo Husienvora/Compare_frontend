@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNormalContext } from "../Context/Contex";
 function Interact() {
-  const { Messages, setMessages, SendMessage } = useNormalContext();
+  const { Messages, setMessages, Loading, SendMessage } = useNormalContext();
   useEffect(() => {}, [Messages]);
 
   return (
@@ -21,6 +21,15 @@ function Interact() {
           );
         }
       })}
+      {Loading ? (
+        <div className="chatContainerai">
+          <div className="chatMessage">
+            <span className="loading loading-dots loading-xs"></span>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="Chathide"></div>
       <div className="inputContainer">
         <input className="input" type="text" placeholder="Send a message" />
